@@ -1,0 +1,152 @@
+================================================================================
+    QUICKSTART - HƯỚNG DẪN NHANH PAYKICKSTART ACCOUNT CREATOR
+================================================================================
+
+🎯 GOAL: Tạo tài khoản PayKickstart hàng loạt + thu thập dữ liệu affiliate
+
+================================================================================
+📋 YÊU CẦU TRƯỚC KHOÁ (5 PHÚT SETUP)
+================================================================================
+
+CHỌN MỘT TRONG 2 CÁCH:
+
+✅ CÁCH 1: Catch-All Email (Khuyến nghị - chạy 30-50 tài khoản/ngày)
+   1. Mua domain ($1-2/năm) từ Porkbun.com
+   2. Thêm vào Cloudflare (miễn phí)
+   3. Bật Email Routing → Catch-all forward tới Gmail
+   4. Tạo 1 Gmail App Password (16 ký tự)
+   5. Chuẩn bị CSV:
+      Email,MailPass,FirstName,LastName
+      acc01@yourdomain.com,app_password_16_chars,John,Smith
+      acc02@yourdomain.com,app_password_16_chars,Emma,Johnson
+
+✅ CÁCH 2: Gmail Riêng (Simple - dùng khi test, 10-20 tài khoản/ngày)
+   1. Có sẵn Gmail không cần mua domain
+   2. Mỗi Gmail cần:
+      - Bật 2-Step Verification
+      - Tạo App Password (Settings → 2-Step → App Passwords)
+   3. Chuẩn bị CSV:
+      Email,MailPass,FirstName,LastName
+      user01@gmail.com,app_pass_user01,John,Smith
+      user02@gmail.com,app_pass_user02,Emma,Johnson
+
+📌 CSV Template có sẵn trong: Data/Data.csv (edit + save)
+
+================================================================================
+🚀 QUICK START (10 PHÚT CHẠY)
+================================================================================
+
+▶ BƯỚC 1: CẤU HÌNH (Chỉ cần làm 1 lần)
+   □ Mở tool
+   □ Tab SETTINGS
+   □ Nếu dùng CÁCH 1: Nhập Gmail catch-all → LƯU EMAIL
+   □ Nếu dùng CÁCH 2: Bỏ qua bước này
+
+▶ BƯỚC 2: TẠO TÀI KHOẢN
+   □ Tab LOG
+   □ CHỌN FILE → chọn Data/Data.csv
+   □ Nhập số luồng (khuyến: 2 luồng)
+   □ BẮT ĐẦU CHẠY → Chờ xong
+
+   💡 Quan sát console log:
+      - Mỗi dòng = 1 tài khoản được xử lý
+      - Status: Thành công / Lỗi
+
+▶ BƯỚC 3: KIỂM TRA KẾT QUẢ (Tạo tài khoản)
+   □ Mở Results/ → KetQua_*.csv
+   □ Xem cột Status: "Thành công" = OK, "Lỗi" = kiểm tra lại
+
+▶ BƯỚC 4: CRAWL DỮ LIỆU (Tùy chọn - thu thập stats affiliate)
+   □ Tab CRAWL DATA
+   □ TẢI FILE → chọn KetQua_*.csv
+   □ (TÙY) Tick checkbox chọn tài khoản hoặc crawl tất cả
+   □ Nhập số luồng (khuyến: 3-5)
+   □ CẬP NHẬT ACC ĐÃ CHỌN hoặc CẬP NHẬT TẤT CẢ
+   □ Chờ progress bar 100% → Mở Results/Crawl/ xem JSON
+
+================================================================================
+🆘 TROUBLESHOOTING NHANH
+================================================================================
+
+❌ "Không nhận được email verify" (CÁCH 1)
+   → Kiểm tra Cloudflare Email Routing đã bật chưa?
+   → Gửi email test đến test@yourdomain.com để xác nhận
+
+❌ "Không nhận được email verify" (CÁCH 2)
+   → Kiểm tra Gmail App Password có đúng không?
+   → Nếu sai, tạo lại App Password mới → update CSV
+
+❌ Tool khởi động chậm hoặc bị đơ
+   → Dùng 1 luồng thay vì 2-4 luồng
+   → Tắt các ứng dụng khác đang chạy
+   → Restart tool
+
+❌ CAPTCHA xuất hiện liên tục
+   → Chạy quá nhanh - giảm số luồng xuống 1
+   → Đợi 30 phút rồi chạy tiếp batch khác
+
+================================================================================
+📊 CẤU TRÚC THỰ MỤC
+================================================================================
+
+PayKickstart-Tool/
+├── tool-create-account-paykickstart.exe  ← Chương trình chính (chạy file này)
+├── README.md                              ← Hướng dẫn chi tiết
+├── QUICKSTART.txt                         ← Tệp này (hướng dẫn nhanh)
+├── Data/
+│   └── Data.csv                           ← ✏️ EDIT CÁI NÀY với danh sách email
+├── Results/
+│   ├── KetQua_*.csv                       ← Output: Tài khoản + Password đã tạo
+│   └── Crawl/
+│       └── email@domain.json              ← Output: Dữ liệu affiliate
+└── Extensions/
+    └── buster.crx                         ← CAPTCHA solver (tự động inject)
+
+================================================================================
+💡 TIPS CHẠY HIỆU QUẢ
+================================================================================
+
+✅ Nên làm:
+   • Test với 5-10 tài khoản trước khi chạy 100+
+   • Backup file Results/ thường xuyên
+   • Chạy 20-30 tài khoản mỗi lần, nghỉ 30 phút rồi tiếp
+   • Dùng proxy chất lượng khi scale 50+ (mua từ IPRoyal/Bright Data)
+   • Monitor console log realtime để phát hiện lỗi sớm
+
+❌ Không nên:
+   • Chạy 100+ tài khoản không proxy
+   • Set luồng = 10 lần chạy đầu tiên
+   • Dùng domain vừa mua chưa warm-up (chờ 24h)
+   • Shared tool + email/domain với người khác (security risk)
+
+================================================================================
+📞 CẦN GIÚP Đỡ?
+================================================================================
+
+1. Đọc phần TROUBLESHOOTING ở README.md (đầy đủ hơn)
+2. Kiểm tra lại yêu cầu: domain/email/password có đúng không?
+3. Xem chi tiết log trong console tool để tìm lỗi
+
+================================================================================
+🎓 TÓAM TẮT WORKFLOW
+================================================================================
+
+  SETUP (1 lần)
+      ↓
+  Edit Data/Data.csv
+      ↓
+  Tab LOG → Chạy tạo tài khoản
+      ↓
+  Kiểm tra Results/KetQua_*.csv
+      ↓
+  Tab CRAWL DATA → Thu thập dữ liệu (tùy chọn)
+      ↓
+  Kiểm tra Results/Crawl/*.json
+      ↓
+  ✅ XONG!
+
+================================================================================
+📝 PHIÊN BẢN: 1.0.0
+🕐 CẬP NHẬT: January 23, 2026
+👤 NGƯỜI TẠO: ndkth
+================================================================================

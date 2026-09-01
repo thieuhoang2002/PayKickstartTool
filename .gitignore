@@ -1,0 +1,29 @@
+# Build outputs
+bin/
+obj/
+publish/
+
+# Packaged delivery artifacts
+PayKickstart-Tool/
+PayKickstart-Tool.zip
+
+# Runtime output (keep the directory placeholder)
+Results/*
+!Results/.gitkeep
+
+# User-specific IDE files
+.vs/
+*.user
+*.suo
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+appsettings.Local.json
+*secret*
+*credentials*
+
+# OS files
+.DS_Store
+Thumbs.db
